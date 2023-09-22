@@ -42,7 +42,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cold_storage_after"></a> [cold\_storage\_after](#input\_cold\_storage\_after) | Specifies the number of days after creation that a recovery point is moved to cold storage. | `number` | `35` | no |
 | <a name="input_delete_after"></a> [delete\_after](#input\_delete\_after) | Specifies the number of days after creation that a recovery point is deleted. Must be 90 days greater than cold\_storage\_after. | `number` | `125` | no |
-| <a name="input_schedule"></a> [schedule](#input\_schedule) | Cron-style schedule for EFS backup vault (default: once a day at 12pm). | `string` | `"0 12 * * ? *"` | no |
+| <a name="input_schedule"></a> [schedule](#input\_schedule) | Cron-style schedule for backup vault (default: once a day at 12pm). | `string` | `"0 12 * * ? *"` | no |
 
 ## Outputs
 

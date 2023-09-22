@@ -12,6 +12,6 @@ variable "delete_after" {
 
 variable "schedule" {
   type        = string
-  description = "Cron-style schedule for EFS backup vault (default: once a day at 12pm)."
+  description = "Cron-style schedule for backup vault (default: once a day at 12pm)."
   default     = "0 12 * * ? *"
 }
