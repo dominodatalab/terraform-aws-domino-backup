@@ -9,7 +9,7 @@ resource "aws_backup_plan" "aws_backup_plan" {
   rule {
     rule_name = "cross-account-rule"
 
-    schedule     = var.schedule
+    schedule     = "cron(${var.schedule})"
     start_window = 60
 
     copy_action {

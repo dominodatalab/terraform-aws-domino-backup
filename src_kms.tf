@@ -22,7 +22,7 @@ resource "aws_kms_key" "aws_src_backup_kms_key" {
             "Sid": "Allow access for Key Administrators",
             "Effect": "Allow",
             "Principal": {
-                "AWS": "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/my_role"
+                "AWS": "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
             },
             "Action": [
                 "kms:Create*",
@@ -48,7 +48,6 @@ resource "aws_kms_key" "aws_src_backup_kms_key" {
             "Principal": {
                 "AWS": [
                     "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.dst_account.account_id}:root",
-                    "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/my_role",
                     "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
                 ]
             },
@@ -67,7 +66,6 @@ resource "aws_kms_key" "aws_src_backup_kms_key" {
             "Principal": {
                 "AWS": [
                     "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.dst_account.account_id}:root",
-                    "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/my_role",
                     "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
                 ]
             },
