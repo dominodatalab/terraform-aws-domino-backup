@@ -30,8 +30,8 @@ resource "aws_backup_plan" "aws_backup_plan" {
   rule {
     rule_name = "cross-account-rule"
 
-    schedule     = "cron(${var.schedule})"
-    start_window = 60
+    schedule                 = "cron(${var.schedule})"
+    start_window             = 60
     enable_continuous_backup = true
 
     copy_action {
