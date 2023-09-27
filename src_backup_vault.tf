@@ -3,6 +3,27 @@ resource "aws_backup_vault" "aws_src_backup_vault" {
   kms_key_arn = aws_kms_key.aws_src_backup_kms_key.arn
 }
 
+resource "aws_backup_vault_policy" "aws_dst_backup_vault_policy" {
+  backup_vault_name = aws_backup_vault.aws_src_backup_vault.name
+  policy            = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "Allow ${data.aws_caller_identity.dst_account.account_id} to copy into ${aws_backup_vault.aws_dst_backup_vault.name}",
+      "Effect": "Allow",
+      "Action": "backup:CopyIntoBackupVault",
+      "Resource": "*",
+      "Principal": {
+        "AWS": "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.dst_account.account_id}:root"
+      }
+    }
+  ]
+}
+POLICY
+}
+
 resource "aws_backup_plan" "aws_backup_plan" {
   name = "cross-account-backup"
 
@@ -32,7 +53,7 @@ resource "aws_backup_selection" "aws_backup_selection" {
 
   selection_tag {
     type  = "STRINGEQUALS"
-    key   = "backup-plan"
-    value = "remote"
+    key   = "backup_plan"
+    value = "cross-account"
   }
 }
