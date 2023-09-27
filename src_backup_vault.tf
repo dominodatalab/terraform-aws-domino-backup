@@ -32,9 +32,15 @@ resource "aws_backup_plan" "aws_backup_plan" {
 
     schedule     = "cron(${var.schedule})"
     start_window = 60
+    enable_continuous_backup = true
 
     copy_action {
       destination_vault_arn = aws_backup_vault.aws_dst_backup_vault.arn
+
+      lifecycle {
+        cold_storage_after = var.cold_storage_after
+        delete_after       = var.delete_after
+      }
     }
 
     lifecycle {
