@@ -43,8 +43,7 @@ resource "aws_backup_plan" "aws_backup_plan" {
     }
 
     lifecycle {
-      cold_storage_after = var.cold_storage_after
-      delete_after       = var.delete_after
+      delete_after = var.delete_after
     }
 
     target_vault_name = aws_backup_vault.aws_src_backup_vault.name
