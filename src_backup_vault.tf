@@ -54,22 +54,22 @@ resource "aws_iam_role" "aws_backup_role" {
   name = "aws_backup_role"
 }
 
-resource "aws_iam_role_policy_attachment" "aws_backup_role-default-policy-backup-attachement" {
+resource "aws_iam_role_policy_attachment" "aws_backup_role_default_policy_backup_attachement" {
   role       = aws_iam_role.aws_backup_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
 }
 
-resource "aws_iam_role_policy_attachment" "aws_backup_role-default-policy-restore-attachement" {
+resource "aws_iam_role_policy_attachment" "aws_backup_role_default_policy_restore_attachement" {
   role       = aws_iam_role.aws_backup_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores"
 }
 
-resource "aws_iam_role_policy_attachment" "aws_backup_role-s3-policy-backup-attachement" {
+resource "aws_iam_role_policy_attachment" "aws_backup_role_s3_policy_backup_attachement" {
   role       = aws_iam_role.aws_backup_role.name
   policy_arn = "arn:aws:iam::aws:policy/AWSBackupServiceRolePolicyForS3Backup"
 }
 
-resource "aws_iam_role_policy_attachment" "aws_backup_role-s3-policy-restore-attachement" {
+resource "aws_iam_role_policy_attachment" "aws_backup_role_s3_policy_restore_attachement" {
   role       = aws_iam_role.aws_backup_role.name
   policy_arn = "arn:aws:iam::aws:policy/AWSBackupServiceRolePolicyForS3Restore"
 }
