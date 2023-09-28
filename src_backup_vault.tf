@@ -50,8 +50,32 @@ resource "aws_backup_plan" "aws_backup_plan" {
   }
 }
 
+resource "aws_iam_role" "aws_backup_role" {
+  name = "aws_backup_role"
+}
+
+resource "aws_iam_role_policy_attachment" "aws_backup_role-default-policy-backup-attachement" {
+  role       = aws_iam_role.aws_backup_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForBackup"
+}
+
+resource "aws_iam_role_policy_attachment" "aws_backup_role-default-policy-restore-attachement" {
+  role       = aws_iam_role.aws_backup_role.name
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSBackupServiceRolePolicyForRestores"
+}
+
+resource "aws_iam_role_policy_attachment" "aws_backup_role-s3-policy-backup-attachement" {
+  role       = aws_iam_role.aws_backup_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSBackupServiceRolePolicyForS3Backup"
+}
+
+resource "aws_iam_role_policy_attachment" "aws_backup_role-s3-policy-restore-attachement" {
+  role       = aws_iam_role.aws_backup_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSBackupServiceRolePolicyForS3Restore"
+}
+
 resource "aws_backup_selection" "aws_backup_selection" {
-  iam_role_arn = "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:role/service-role/AWSBackupDefaultServiceRole"
+  iam_role_arn = aws_iam_role.aws_backup_role.arn
   name         = "backup_selection"
   plan_id      = aws_backup_plan.aws_backup_plan.id
 
