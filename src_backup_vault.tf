@@ -51,7 +51,7 @@ resource "aws_backup_plan" "aws_backup_plan" {
 }
 
 resource "aws_iam_role" "aws_backup_role" {
-  name = "aws_backup_role"
+  name               = "aws_backup_role"
   assume_role_policy = <<EOF
 {
     "Version": "2012-10-17",
