@@ -52,6 +52,20 @@ resource "aws_backup_plan" "aws_backup_plan" {
 
 resource "aws_iam_role" "aws_backup_role" {
   name = "aws_backup_role"
+  assume_role_policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "backup.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}
+EOF
 }
 
 resource "aws_iam_role_policy_attachment" "aws_backup_role_default_policy_backup_attachement" {
