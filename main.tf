@@ -6,8 +6,6 @@ data "aws_partition" "dst_current" {
 
 data "aws_caller_identity" "current" {}
 
-data "aws_region" "current" {}
-
 data "aws_caller_identity" "dst_account" {
   provider = aws.dst
 }
