@@ -1,5 +1,9 @@
 data "aws_partition" "current" {}
 
+data "aws_partition" "dst_current" {
+  provider = aws.dst
+}
+
 data "aws_caller_identity" "current" {}
 
 data "aws_region" "current" {}
