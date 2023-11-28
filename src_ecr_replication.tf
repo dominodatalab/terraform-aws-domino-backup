@@ -13,7 +13,7 @@ resource "aws_ecr_registry_policy" "ecr_registry_permission" {
           "ecr:CreateRepository",
           "ecr:ReplicateImage"
         ],
-        
+
         Principal = {
           "AWS" : "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.dst_account.account_id}:root"
         }
