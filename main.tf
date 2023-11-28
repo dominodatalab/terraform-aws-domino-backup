@@ -6,6 +6,10 @@ data "aws_caller_identity" "dst_account" {
   provider = aws.dst
 }
 
+data "aws_region" "dst_region" {
+  provider = aws.dst
+}
+
 terraform {
   required_version = ">= 1.0.7"
   required_providers {
