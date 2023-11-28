@@ -1,4 +1,6 @@
 resource "aws_ecr_registry_policy" "ecr_registry_permission" {
+  provider = aws.dst
+
   policy = jsonencode({
     Version = "2012-10-17",
     Statement = [
