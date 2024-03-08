@@ -11,7 +11,7 @@ resource "aws_backup_vault" "aws_dst_backup_vault" {
   }
 }
 
-resource "aws_backup_vault_policy" "aws_dst_backup_vault_policy" {
+resource "aws_backup_vault_policy" "aws_src_backup_vault_policy" {
   backup_vault_name = aws_backup_vault.aws_dst_backup_vault.name
   provider          = aws.dst
   policy            = <<POLICY
