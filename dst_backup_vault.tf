@@ -10,3 +10,25 @@ resource "aws_backup_vault" "aws_dst_backup_vault" {
     }
   }
 }
+
+resource "aws_backup_vault_policy" "aws_dst_backup_vault_policy" {
+  backup_vault_name = aws_backup_vault.aws_dst_backup_vault.name
+  provider          = aws.dst
+  policy            = <<POLICY
+{
+  "Version": "2012-10-17",
+  "Id": "default",
+  "Statement": [
+    {
+      "Sid": "Allow ${data.aws_caller_identity.current.account_id} to copy into ${aws_backup_vault.aws_dst_backup_vault.name}",
+      "Effect": "Allow",
+      "Action": "backup:CopyIntoBackupVault",
+      "Resource": "*",
+      "Principal": {
+        "AWS": "arn:${data.aws_partition.current.partition}:iam::${data.aws_caller_identity.current.account_id}:root"
+      }
+    }
+  ]
+}
+POLICY
+}

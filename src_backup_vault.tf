@@ -11,7 +11,7 @@ resource "aws_backup_vault_policy" "aws_dst_backup_vault_policy" {
   "Id": "default",
   "Statement": [
     {
-      "Sid": "Allow ${data.aws_caller_identity.dst_account.account_id} to copy into ${aws_backup_vault.aws_dst_backup_vault.name}",
+      "Sid": "Allow ${data.aws_caller_identity.dst_account.account_id} to copy into ${aws_backup_vault.aws_src_backup_vault.name}",
       "Effect": "Allow",
       "Action": "backup:CopyIntoBackupVault",
       "Resource": "*",
