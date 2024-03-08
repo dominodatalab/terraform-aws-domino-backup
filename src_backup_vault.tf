@@ -3,7 +3,7 @@ resource "aws_backup_vault" "aws_src_backup_vault" {
   kms_key_arn = aws_kms_key.aws_src_backup_kms_key.arn
 }
 
-resource "aws_backup_vault_policy" "aws_dst_backup_vault_policy" {
+resource "aws_backup_vault_policy" "aws_src_backup_vault_policy_allow_dst" {
   backup_vault_name = aws_backup_vault.aws_src_backup_vault.name
   policy            = <<POLICY
 {
