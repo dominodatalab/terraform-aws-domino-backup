@@ -4,9 +4,9 @@ resource "aws_backup_vault" "aws_src_backup_vault" {
 }
 
 resource "aws_backup_vault_lock_configuration" "aws_src_backup_vault_lock" {
-  backup_vault_name   = aws_backup_vault.aws_src_backup_vault.name
-  min_retention_days  = floor(var.delete_after * (1-0.1))
-  max_retention_days  = var.delete_after
+  backup_vault_name  = aws_backup_vault.aws_src_backup_vault.name
+  min_retention_days = floor(var.delete_after * (1-0.1))
+  max_retention_days = var.delete_after
 }
 
 resource "aws_backup_vault_policy" "aws_src_backup_vault_policy_allow_dst" {
