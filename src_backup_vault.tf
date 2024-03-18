@@ -3,6 +3,12 @@ resource "aws_backup_vault" "aws_src_backup_vault" {
   kms_key_arn = aws_kms_key.aws_src_backup_kms_key.arn
 }
 
+resource "aws_backup_vault_lock_configuration" "aws_src_backup_vault_lock" {
+  backup_vault_name  = aws_backup_vault.aws_src_backup_vault.name
+  min_retention_days = floor(var.delete_after * (1 - 0.1))
+  max_retention_days = var.delete_after
+}
+
 resource "aws_backup_vault_policy" "aws_src_backup_vault_policy_allow_dst" {
   backup_vault_name = aws_backup_vault.aws_src_backup_vault.name
   policy            = <<POLICY
