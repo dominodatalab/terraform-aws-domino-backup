@@ -1,5 +1,13 @@
 # Domino Cloud Backup
 
+TF Module which provides support for Domino using AWS Backup Vault
+
+Features
+
+* Encryption at Rest
+* Allow cross-region backups
+* Allow cross-account backups
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
