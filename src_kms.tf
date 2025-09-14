@@ -1,4 +1,9 @@
+locals {
+  src_kms_key_arn = var.src_kms_key_arn != null ? var.src_kms_key_arn : aws_kms_key.aws_src_backup_kms_key[0].arn
+}
+
 resource "aws_kms_key" "aws_src_backup_kms_key" {
+  count               = var.src_kms_key_arn == null ? 1 : 0
   description         = "KMS Key for Source Backup"
   enable_key_rotation = true
   policy              = <<POLICY
@@ -87,6 +92,7 @@ POLICY
 }
 
 resource "aws_kms_alias" "aws_src_kms_alias" {
+  count         = var.src_kms_key_arn == null ? 1 : 0
   name          = "alias/aws-backup-kms"
-  target_key_id = aws_kms_key.aws_src_backup_kms_key.key_id
+  target_key_id = aws_kms_key.aws_src_backup_kms_key[0].key_id
 }

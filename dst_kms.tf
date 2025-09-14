@@ -1,4 +1,10 @@
+
+locals {
+  dst_kms_key_arn = var.dst_kms_key_arn != null ? var.dst_kms_key_arn : aws_kms_key.aws_dst_backup_kms_key[0].arn
+}
+
 resource "aws_kms_key" "aws_dst_backup_kms_key" {
+  count               = var.dst_kms_key_arn == null ? 1 : 0
   description         = "KMS Key for Destination Backup"
   enable_key_rotation = true
   provider            = aws.dst
@@ -85,7 +91,8 @@ POLICY
 }
 
 resource "aws_kms_alias" "aws_dst_kms_alias" {
+  count         = var.dst_kms_key_arn == null ? 1 : 0
   name          = "alias/aws-backup-kms"
   provider      = aws.dst
-  target_key_id = aws_kms_key.aws_dst_backup_kms_key.key_id
+  target_key_id = aws_kms_key.aws_dst_backup_kms_key[0].key_id
 }

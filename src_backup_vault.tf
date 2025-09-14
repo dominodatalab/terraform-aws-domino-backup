@@ -1,6 +1,6 @@
 resource "aws_backup_vault" "aws_src_backup_vault" {
   name        = "aws_backup_vault"
-  kms_key_arn = aws_kms_key.aws_src_backup_kms_key.arn
+  kms_key_arn = local.src_kms_key_arn
 }
 
 resource "aws_backup_vault_lock_configuration" "aws_src_backup_vault_lock" {
