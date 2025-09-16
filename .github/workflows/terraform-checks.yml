@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@master
       - uses: actions/setup-python@v5
       - name: Install tflint
-          run: |
-            curl -L https://github.com/terraform-linters/tflint/releases/latest/download/tflint_linux_amd64.zip -o tflint.zip
-            unzip tflint.zip -d /usr/local/bin
-            tflint --version
+        run: |
+          curl -L https://github.com/terraform-linters/tflint/releases/latest/download/tflint_linux_amd64.zip -o tflint.zip
+          unzip tflint.zip -d /usr/local/bin
+          tflint --version
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: terraform_tflint --all-files
