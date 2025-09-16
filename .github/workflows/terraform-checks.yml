@@ -17,18 +17,12 @@ jobs:
     name: Run tflint
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: "1.10.4"
+      - name: Checkout source code
+        uses: actions/checkout@master
+      - uses: actions/setup-python@v5
       - name: Install tflint
-        uses: nick-fields/retry@v3.0.0
-        with:
-          timeout_seconds: 30
-          max_attempts: 5
-          retry_on: error
-          command: >-
-            curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+        run: >-
+          curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
       - uses: pre-commit/action@v3.0.1
         with:
           extra_args: terraform_tflint --all-files
@@ -94,6 +88,6 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Check for hardcoded aws partition
-        uses: pre-commit/action@v3.0.0
+        uses: pre-commit/action@v3.0.1
         with:
           extra_args: check_aws_partition --all-files
