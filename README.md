@@ -61,7 +61,9 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_delete_after"></a> [delete\_after](#input\_delete\_after) | Specifies the number of days after creation that a recovery point is deleted. | `number` | `35` | no |
+| <a name="input_dst_kms_key_arn"></a> [dst\_kms\_key\_arn](#input\_dst\_kms\_key\_arn) | ARN of the destination KMS key. If not provided, a new KMS key will be created. | `string` | `null` | no |
 | <a name="input_schedule"></a> [schedule](#input\_schedule) | Cron-style schedule for backup vault (default: once a day at 12pm). | `string` | `"0 12 * * ? *"` | no |
+| <a name="input_src_kms_key_arn"></a> [src\_kms\_key\_arn](#input\_src\_kms\_key\_arn) | ARN of the source KMS key. If not provided, a new KMS key will be created. | `string` | `null` | no |
 
 ## Outputs
 
